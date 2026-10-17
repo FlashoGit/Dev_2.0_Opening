@@ -1,0 +1,66 @@
+{
+    "bio_data": {
+        "name": "John Doe",
+        "age": 20 ,
+        "gender": "M",
+        "picture": "",
+        "bio_description": ""
+    },
+    "chess_data": {
+        "chess.com": {
+            "username": "Goober",
+            "time_control": {
+                "Rapid": {
+                    "elo": 1000,
+                    "games_played": 100
+                },
+                "Blitz": {
+                    "elo": 900,
+                    "games_played": 400
+                },
+                "Bullet": {
+                    "elo": 1200,
+                    "games_played": 1500
+                }
+            },
+            "fav_time_control": "Blitz"
+        },
+        "lichess": {
+            "time_control": {
+                "Rapid": {
+                    "elo": 1000,
+                    "games_played": 100
+                },
+                "Blitz": {
+                    "elo": 900,
+                    "games_played": 400
+                },
+                "Bullet": {
+                    "elo": 1200,
+                    "games_played": 1500
+                }
+            },
+            "fav_time_control": "Blitz"
+        },
+        "FIDE": {
+            "time_control": {
+                "Classical": {
+                    "elo": 1000,
+                    "games_played": 100
+                },
+                "Rapid": {
+                    "elo": 1000,
+                    "games_played": 100
+                },
+                "Blitz": {
+                    "elo": 900,
+                    "games_played": 400
+                }
+            },
+            "fav_time_control": "Blitz"
+        }
+    },
+    "location_data": {
+        "city": "Ottawa"
+    }
+}
