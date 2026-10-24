@@ -1,26 +1,26 @@
 {
     "bio_data": {
-        "name": "John Doe",
-        "age": 20 ,
-        "gender": "M",
-        "picture": "",
-        "bio_description": ""
+        "Name": "John Doe",
+        "Age": 20 ,
+        "Gender": "M",
+        "Picture": "",
+        "Bio_Description": ""
     },
-    "chess_data": {
-        "chess.com": {
-            "username": "Goober",
-            "time_control": {
+    "Chess_Data": {
+        "Chesscom": {
+            "Username": "Goober",
+            "Time_Control": {
                 "Rapid": {
-                    "elo": 1000,
-                    "games_played": 100
+                    "Elo": 1000, 
+                    "Games_Played": 100
                 },
                 "Blitz": {
-                    "elo": 900,
-                    "games_played": 400
+                    "Elo": 900,
+                    "Games_Played": 400
                 },
                 "Bullet": {
-                    "elo": 1200,
-                    "games_played": 1500
+                    "Elo": 1200,
+                    "Games_Played": 1500
                 }
             },
             "fav_time_control": "Blitz"
@@ -28,16 +28,16 @@
         "lichess": {
             "time_control": {
                 "Rapid": {
-                    "elo": 1000,
-                    "games_played": 100
+                    "Elo": 1000,
+                    "Games_Played": 100
                 },
                 "Blitz": {
-                    "elo": 900,
-                    "games_played": 400
+                    "Elo": 900,
+                    "Games_Played": 400
                 },
                 "Bullet": {
-                    "elo": 1200,
-                    "games_played": 1500
+                    "Elo": 1200,
+                    "Games_Played": 1500
                 }
             },
             "fav_time_control": "Blitz"
@@ -45,22 +45,22 @@
         "FIDE": {
             "time_control": {
                 "Classical": {
-                    "elo": 1000,
-                    "games_played": 100
+                    "Elo": 1000,
+                    "Games_Played": 100
                 },
                 "Rapid": {
-                    "elo": 1000,
-                    "games_played": 100
+                    "Elo": 1000,
+                    "Games_Played": 100
                 },
                 "Blitz": {
-                    "elo": 900,
-                    "games_played": 400
+                    "Elo": 900,
+                    "Games_Played": 400
                 }
             },
-            "fav_time_control": "Blitz"
+            "Fav_Time_Control": "Blitz"
         }
     },
-    "location_data": {
-        "city": "Ottawa"
+    "Location_Data": {
+        "City": "Ottawa"
     }
 }
