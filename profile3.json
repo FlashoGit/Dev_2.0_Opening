@@ -1,0 +1,66 @@
+{
+    "bio_data": {
+        "Name": "Bob Joe",
+        "Age": 20 ,
+        "Gender": "M",
+        "Picture": "",
+        "Bio_Description": ""
+    },
+    "Chess_Data": {
+        "Chesscom": {
+            "Username": "Randomguy34",
+            "Time_Control": {
+                "Rapid": {
+                    "Elo":"Rapid 200", 
+                    "Games_Played": 100
+                },
+                "Blitz": {
+                    "Elo": 900,
+                    "Games_Played": 400
+                },
+                "Bullet": {
+                    "Elo": 1200,
+                    "Games_Played": 1500
+                }
+            },
+            "fav_time_control": "Blitz"
+        },
+        "lichess": {
+            "time_control": {
+                "Rapid": {
+                    "Elo": 1000,
+                    "Games_Played": 100
+                },
+                "Blitz": {
+                    "Elo": 900,
+                    "Games_Played": 400
+                },
+                "Bullet": {
+                    "Elo": 1200,
+                    "Games_Played": 1500
+                }
+            },
+            "fav_time_control": "Blitz"
+        },
+        "FIDE": {
+            "time_control": {
+                "Classical": {
+                    "Elo": 1000,
+                    "Games_Played": 100
+                },
+                "Rapid": {
+                    "Elo": 1000,
+                    "Games_Played": 100
+                },
+                "Blitz": {
+                    "Elo": 900,
+                    "Games_Played": 400
+                }
+            },
+            "Fav_Time_Control": "Blitz"
+        }
+    },
+    "Location_Data": {
+        "City": "Quebec city"
+    }
+}
