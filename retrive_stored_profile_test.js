@@ -59,5 +59,7 @@ for(const value of localStorage.getItem("location_data")){
 console.log(output);
 
 //Wrap chess_com, lichess and fide together.
-console.log(JSON.stringify(wrap("chess_data", "chess_com", "lichess", "fide")));
+console.log(wrap("chess_data", "chess_com", "lichess", "fide"));
 
+//Clear localStorage
+localStorage.clear();
