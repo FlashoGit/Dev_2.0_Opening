@@ -7,14 +7,14 @@ import java.io.IOException;
 public class BasicServer {
     public static void main(String args[]){
         try{
-            HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
+            HttpServer server = HttpServer.create(new InetSocketAddress("0.0.0.0", 8080), 0);
 
             server.createContext("/", new HtmlFileHandler("start.html"));
             server.createContext("/test.js", new ScriptFileHandler("test.js"));
 
             server.setExecutor(null);
             server.start();
-            System.out.println("Server started on localhost:8080");
+            System.out.println("Server started.");
         }
         catch(IOException e){
             System.out.println(e);
