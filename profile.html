@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create your profile</title>
+</head>
+<body>
+  <main class="card">
+    <h1>Create your profile</h1>
+    <p class="subtitle">Tell other players a bit about yourself so they can find you for an over-the-board game.</p>
+
+    <form id="profile-form" novalidate>
+      <div class="field">
+        <label for="Name">Name</label>
+        <input id="Name" name="Name" type="text" autocomplete="name" placeholder="" maxlength="60">
+        <small class="error" data-error-for="Name"></small>
+      </div>
+
+      <div class="field">
+        <label for="Age">Age</label>
+        <input id="Age" name="Age" type="number" inputmode="numeric" min="18" max="120" placeholder="">
+        <small class="hint">You must be 18 or older.</small>
+        <small class="error" data-error-for="Age"></small>
+      </div>
+
+      <div class="field">
+        <label for="Gender">Gender</label>
+        <select id="Gender" name="Gender">
+          <option value="">Prefer not to say</option>
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        <small class="error" data-error-for="Gender"></small>
+      </div>
+
+      <div class="field">
+        <label for="City">City</label>
+        <input id="City" name="City" type="text" autocomplete="address-level2" placeholder="" maxlength="60">
+        <small class="hint">Just the city or neighbourhood, never your home address.</small>
+        <small class="error" data-error-for="City"></small>
+      </div>
+
+      <div class="field">
+        <label for="Picture">Picture <span class="optional">(optional)</span></label>
+        <input id="Picture" name="Picture" type="file" accept="image/*">
+        <img id="picture-preview" alt="Profile picture preview" hidden>
+        <button type="button" id="remove-picture" class="secondary small" hidden>Remove picture</button>
+        <small class="error" data-error-for="Picture"></small>
+      </div>
+
+      <div class="field">
+        <label for="Bio_Description">Bio <span class="optional">(optional)</span></label>
+        <textarea id="Bio_Description" name="Bio_Description" rows="4" maxlength="300"
+                  placeholder=""></textarea>
+        <small class="hint"><span id="bio-count">0</span>/300</small>
+        <small class="error" data-error-for="Bio_Description"></small>
+      </div>
+
+      <div class="actions">
+        <button type="submit">Save profile</button>
+        <button type="button" id="clear-btn" class="secondary">Clear form</button>
+      </div>
+    </form>
+
+    <section id="result" hidden>
+      <h2 id="status"></h2>

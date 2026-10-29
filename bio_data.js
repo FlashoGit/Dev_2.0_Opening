@@ -22,7 +22,7 @@ const statusEl = document.getElementById('status');
 const jsonOutput = document.getElementById('json-output');
 const downloadBtn = document.getElementById('download-btn');
  
-let pictureData = ''; // the picture as a small data URL ('' = none)
+let pictureData = ''; 
 let currentProfile = null;
  
 
@@ -74,13 +74,14 @@ function validate(bio, location) {
  
 function showErrors(errors) {
   form.querySelectorAll('[data-error-for]').forEach((el) => (el.textContent = ''));
-  form.querySelectorAll('.invalid').forEach((el) => el.classList.remove('invalid'));
- 
+  form.querySelectorAll('input[type="text"], input[type="number"], select, textarea')
+  .forEach((el) => (el.computedStyleMap.borderColor = COLORS.border));
+
   for (const [field, message] of Object.entries(errors)) {
     const errorEl = form.querySelector(`[data-error-for="${field}"]`);
     const inputEl = form.elements[field];
     if (errorEl) errorEl.textContent = message;
-    if (inputEl) inputEl.classList.add('invalid');
+    if (inputEl) inputEl.style.borderColor = COLORS.error;
   }
  
   const firstBad = Object.keys(errors)[0];
@@ -143,7 +144,7 @@ function saveProfile(bio, location) {
     localStorage.setItem('location_data', JSON.stringify(location));
     return true;
   } catch {
-    return false; // storage full or blocked
+    return false; 
   }
 }
  
@@ -160,7 +161,7 @@ function loadSavedProfile() {
     }
     if (location) form.elements.City.value = location.City ?? '';
   } catch {
-    /
+    
   }
 }
  
@@ -174,56 +175,52 @@ bioInput.addEventListener('input', () => {
   bioCount.textContent = bioInput.value.length;
 });
  
-
 async function sendToServer(profile) {
   let id = null;
   try { id = localStorage.getItem('profile_id'); } catch { /* ignore */ }
- 
+
   const res = await fetch('/api/profile', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ ...profile, id }), // object -> JSON text
+    body: JSON.stringify({ ...profile, id }),
   });
   const result = await res.json();
   if (!res.ok) throw new Error(result.error || 'The server refused the profile.');
- 
+
   try { localStorage.setItem('profile_id', result.id); } catch { /* ignore */ }
   return result.id;
 }
- 
+
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
- 
+
   const bio = getBioData();
   const location = getLocationData();
   const errors = validate(bio, location);
   showErrors(errors);
- 
+
   if (Object.keys(errors).length > 0) {
     resultSection.hidden = true;
     return;
   }
- 
+  
   currentProfile = buildProfileJson(bio, location);
   const savedLocally = saveProfile(bio, location);
- 
-  // Try the server. If it isn't running, the local copy and the download button still work.
+
   try {
     const id = await sendToServer(currentProfile);
-    statusEl.textContent = `Profile saved on the server (profiles/${id}.json). Here is your profile.json:`;
-  } catch (err) {
-    const why = err instanceof TypeError ? 'the server could not be reached' : err.message;
-    statusEl.textContent = (savedLocally ? 'Saved in this browser only' : 'Not saved') +
-      ` (${why}). You can still download the file:`;
-  }
- 
-  
+    statusEl.textContent = `Profile saved successfully! Your profile ID is ${id}.`;}
+    catch (err) {
+      const why = err instanceof TypeError ? 'Network error' : err.message;
+      statusEl.textContent = (savedLocally ? 'Saved in the browser only': 'Not Saved') + '(${why}). You can still download the profile below.';
+    }
+
   const preview = structuredClone(currentProfile);
   if (preview.bio_data.Picture) preview.bio_data.Picture = '(picture data...)';
-  jsonOutput.textContent = JSON.stringify(preview, null, 2); // textContent = XSS-safe
+  jsonOutput.textContent = JSON.stringify(preview, null, 2);
   resultSection.hidden = false;
 });
- 
+
 clearBtn.addEventListener('click', () => {
   form.reset();
   setPicture('');
@@ -244,6 +241,6 @@ downloadBtn.addEventListener('click', () => {
   URL.revokeObjectURL(url);
 });
  
-
+applyStyles();
 loadSavedProfile();
 bioCount.textContent = bioInput.value.length;
