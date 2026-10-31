@@ -29,3 +29,60 @@ function wrap(wrapper_key, ...keys){
     //Return the object
     return wrapped;
 }
+
+//Define a function to post an object as a JSON.
+async function post_profile(object, file_name){
+    console.log("POST profile.");
+    //Define a constant for the address for POST requests.
+    const REQUEST_ADDRESS = "/json_post/" + file_name;
+
+    try {
+        //Send a POST request containing the object as a JSON.
+        const response = await fetch((REQUEST_ADDRESS), {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(object)
+        });
+
+        //Debug: Print the response from the server.
+        console.log("Server response:", await response.json());
+    }
+    catch(e){
+        console.error(e);
+    }
+}
+
+//Define a function to return a profile of a given file name (firstnamelastnameage.json).
+async function get_profile(file_name){
+    //Define a constant for the address for POST requests.
+    const REQUEST_ADDRESS = "/json_get/" + file_name;
+
+    try {
+        //Send a GET request for the JSON.
+        const response = await fetch(REQUEST_ADDRESS);
+
+        //Get result object of the response
+        const result = await response.json();
+
+        //Debug: Print the response from the server.
+        console.log("Server response:", result);
+
+        //Return the object contained in the JSON.
+        return result;
+    }
+    catch(e){
+        console.error(e);
+    }
+}
+
+//create a function that takes a profile and displays it in the profilediv
+function displayProfiles(prof) {
+  for (const [key, value] of Object.entries(prof)) {
+    const profileDiv = document.getElementById("profilediv");
+    const keyDiv = document.createElement("div");
+    keyDiv.textContent = key + ": " + JSON.stringify(value);
+    profileDiv.appendChild(keyDiv);
+  }
+}
