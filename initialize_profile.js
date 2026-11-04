@@ -33,12 +33,7 @@ if (!localStorage.getItem("profile3")) {
 }
 //create a function that takes a profile and displays it in the profilediv
 function displayProfiles(prof) {
-  for (const [key, value] of Object.entries(prof)) {
-    const profileDiv = document.getElementById("profilediv");
-    const keyDiv = document.createElement("div");
-    keyDiv.textContent = key + ": " + JSON.stringify(value);
-    profileDiv.appendChild(keyDiv);
-  }
+  renderProfileLayout(prof, document.getElementById("profilediv"));
 }
   function hideProfileDiv() {
     const profileDiv = document.getElementById("profilediv");
