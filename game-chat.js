@@ -52,7 +52,7 @@
   const root = document.createElement('main');
   root.className = 'game-chat';
   root.innerHTML = `
-    <h1 class="gc-heading">Chessmmate chat</h1>
+    <h1 class="gc-heading">Chessmate chat</h1>
     <p class="gc-subtitle">A simple live chat for two players no account needed and no encryption for now might be added with WebRTC.</p>
     <div class="gc-grid">
       <section class="gc-panel" aria-label="Connection settings">
@@ -71,7 +71,7 @@
           <button type="button" class="gc-button gc-danger" id="gc-disconnect" disabled>Disconnect</button>
         </div>
         <div class="gc-status" aria-live="polite"><span id="gc-dot" class="gc-dot"></span><span id="gc-status-text">Loading connection library...</span></div>
-        <p class="gc-muted"> T chant player 1 shares their ID. Player 2 pastes it and presses Connect. Both leave this page open while chatting. If one page is closed or reloded it will end chat and must start a new one.</p>
+        <p class="gc-muted">chat player 1 shares their ID. Player 2 pastes it and presses Connect. Both leave this page open while chatting. If one page is closed or reloded it will end chat and must start a new one.</p>
       </section>
       <section class="gc-panel gc-chat" aria-label="Chat room">
         <div class="gc-chathead"><h2>Chat no bad words Nica 30 would not like it.</h2><small id="gc-with">No other player connected</small></div>
