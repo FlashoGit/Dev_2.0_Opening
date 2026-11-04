@@ -6,7 +6,7 @@ const COLORS = { page: '#1f2a24', green: '#5b8c5a', border: '#bbb', error: '#c03
 
 function applyStyles() {
   const all = (selector) => [...document.querySelectorAll(selector)];
-  // set(elements, { cssProperty: value }) writes the properties into each element's style
+ 
   const set = (elements, css) => elements.forEach((el) => Object.assign(el.style, css));
 
   set([document.body], {
@@ -35,10 +35,7 @@ function applyStyles() {
   set(all('.hint'), { color: COLORS.hint });
   set(all('[data-error-for]'), { color: COLORS.error, minHeight: '1em' });
 
-  // NOTE: no "display" is set here on anything that uses the hidden attribute
-  // (the picture preview, the remove button, the result section), because an
-  // inline display value would override hidden and the element could never be hidden.
-  // (setPicture() in create_profile.js sets the preview's display only while a picture is showing.)
+
   set(all('#picture-preview'), {
     width: '96px', height: '96px', margin: '0.6rem 0',
     objectFit: 'cover', borderRadius: '50%', border: `2px solid ${COLORS.green}`,
