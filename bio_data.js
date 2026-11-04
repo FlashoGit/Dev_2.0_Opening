@@ -230,16 +230,7 @@ clearBtn.addEventListener('click', () => {
   currentProfile = null;
 });
  
-downloadBtn.addEventListener('click', () => {
-  if (!currentProfile) return;
-  const blob = new Blob([JSON.stringify(currentProfile, null, 4)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'profile.json';
-  a.click();
-  URL.revokeObjectURL(url);
-});
+
  
 applyStyles();
 loadSavedProfile();
