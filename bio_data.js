@@ -205,7 +205,7 @@ form.addEventListener('submit', async (e) => {
   }
   
   currentProfile = buildProfileJson(bio, location);
-  const savedLocally = saveProfile(bio, location);
+  const savedLocally = saveProfile(currentProfile);
 
   try {
     const id = await sendToServer(currentProfile);
