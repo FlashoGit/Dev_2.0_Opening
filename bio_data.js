@@ -138,10 +138,9 @@ removePictureBtn.addEventListener('click', () => {
 });
  
 
-function saveProfile(bio, location) {
+function saveProfile(profile) {
   try {
-    localStorage.setItem('bio_data', JSON.stringify(bio));
-    localStorage.setItem('location_data', JSON.stringify(location));
+    localStorage.setItem('profile', JSON.stringify(profile));
     return true;
   } catch {
     return false; 
@@ -150,8 +149,9 @@ function saveProfile(bio, location) {
  
 function loadSavedProfile() {
   try {
-    const bio = JSON.parse(localStorage.getItem('bio_data'));
-    const location = JSON.parse(localStorage.getItem('location_data'));
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    const bio = profile.bio_data;
+    const location = profile.location;
     if (bio) {
       form.elements.Name.value = bio.Name ?? '';
       form.elements.Age.value = bio.Age ?? '';
