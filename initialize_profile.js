@@ -1,5 +1,5 @@
 //creates variables
-var profile1, profile2, profile3;
+var profile1, profile2, profile3, createdprofile;
 async function initializeProfile() {
 
 //creates an if statement that checks if the profile is in local storage and if not it fetches the profile from the json file and stores it in local storage
@@ -29,6 +29,8 @@ if (!localStorage.getItem("profile3")) {
 }
 
   profile3 = JSON.parse(localStorage.getItem("profile3"));
+
+  createdprofile = JSON.parse(localStorage.getItem("profile"));
   initializeButtons();
 }
 //create a function that takes a profile and displays it in the profilediv
