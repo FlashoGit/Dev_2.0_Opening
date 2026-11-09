@@ -5,6 +5,7 @@ document.getElementById("buttoninfouser2").innerHTML = "Elo: " + profile2.Chess_
 document.getElementById("buttoninfouser3").innerHTML = "Elo: " + profile3.Chess_Data.Chesscom.Time_Control.Rapid.Elo + "  Location: " + profile3.Location_Data.City;
 if (createdprofile !== null) {
   document.getElementById("buttoninfouser4").innerHTML =  "Location: " + createdprofile.Location_Data.City;
+  buttoninfouser4.style.display = "block";
 }
 else
 {
@@ -15,6 +16,7 @@ button2.textContent = "View " + profile2.Chess_Data.Chesscom.Username + "'s Prof
 button3.textContent = "View " + profile3.Chess_Data.Chesscom.Username + "'s Profile";
 if (createdprofile !== null) {
   button4.textContent = "View " + createdprofile.bio_data.Name + "'s Profile";
+  button4.style.display = "block";
 }
 else
 {
