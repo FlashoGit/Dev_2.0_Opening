@@ -3,11 +3,23 @@ function initializeButtons() {
 document.getElementById("buttoninfouser1").innerHTML = "Elo: " + profile1.Chess_Data.Chesscom.Time_Control.Rapid.Elo + "  Location: " + profile1.Location_Data.City;
 document.getElementById("buttoninfouser2").innerHTML = "Elo: " + profile2.Chess_Data.Chesscom.Time_Control.Rapid.Elo + "  Location: " + profile2.Location_Data.City;
 document.getElementById("buttoninfouser3").innerHTML = "Elo: " + profile3.Chess_Data.Chesscom.Time_Control.Rapid.Elo + "  Location: " + profile3.Location_Data.City;
-document.getElementById("buttoninfouser4").innerHTML =  "Location: " + createdprofile.Location_Data.City;
+if (createdprofile !== null) {
+  document.getElementById("buttoninfouser4").innerHTML =  "Location: " + createdprofile.Location_Data.City;
+}
+else
+{
+  buttoninfouser4.style.display = "none";
+}
 button1.textContent = "View " + profile1.Chess_Data.Chesscom.Username + "'s Profile";
 button2.textContent = "View " + profile2.Chess_Data.Chesscom.Username + "'s Profile";
 button3.textContent = "View " + profile3.Chess_Data.Chesscom.Username + "'s Profile";
-button4.textContent = "View " + createdprofile.bio_data.Name + "'s Profile";
+if (createdprofile !== null) {
+  button4.textContent = "View " + createdprofile.bio_data.Name + "'s Profile";
+}
+else
+{
+  button4.style.display = "none";
+}
 document.getElementById("backbutton").style.display = "none";
 document.getElementById("chat").style.display = "none";
 }
@@ -53,6 +65,7 @@ function myButton3() {
 }
 
 function myButton4() {
+  if (createdprofile !== null) {
   document.getElementById("chat").style.display = "block";
   document.getElementById("backbutton").style.display = "block";
   document.getElementById("button1").style.display = "none";
@@ -65,6 +78,7 @@ function myButton4() {
   document.getElementById("buttoninfouser4").style.display = "none";
   document.getElementById("profileheader").style.display = "none";
   displayProfiles(createdprofile);
+  }
 }
 function backButton() {
   document.getElementById("chat").style.display = "none";
