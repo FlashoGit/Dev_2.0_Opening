@@ -7,7 +7,7 @@ document.getElementById("buttoninfouser4").innerHTML =  "Location: " + createdpr
 button1.textContent = "View " + profile1.Chess_Data.Chesscom.Username + "'s Profile";
 button2.textContent = "View " + profile2.Chess_Data.Chesscom.Username + "'s Profile";
 button3.textContent = "View " + profile3.Chess_Data.Chesscom.Username + "'s Profile";
-button4.textContent = "View " + createdprofile.Chess_Data.Chesscom.Username + "'s Profile";
+button4.textContent = "View " + createdprofile.bio_data.Name + "'s Profile";
 document.getElementById("backbutton").style.display = "none";
 document.getElementById("chat").style.display = "none";
 }
