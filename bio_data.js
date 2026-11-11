@@ -75,7 +75,7 @@ function validate(bio, location) {
 function showErrors(errors) {
   form.querySelectorAll('[data-error-for]').forEach((el) => (el.textContent = ''));
   form.querySelectorAll('input[type="text"], input[type="number"], select, textarea')
-  .forEach((el) => (el.computedStyleMap.borderColor = COLORS.border));
+  .forEach((el) => (el.style.borderColor = COLORS.border));
 
   for (const [field, message] of Object.entries(errors)) {
     const errorEl = form.querySelector(`[data-error-for="${field}"]`);

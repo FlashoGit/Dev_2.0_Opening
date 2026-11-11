@@ -5,15 +5,15 @@ import java.net.InetSocketAddress;
 import java.io.IOException;
 
 public class BasicServer {
-    private String name;
+    private String url;
 
     BasicServer(ServerNetworkEnum networkMode) throws Exception{
         switch(networkMode){
             case LOCAL:
-                this.name = "127.0.0.1";
+                this.url = "127.0.0.1";
                 break;
             case LAN:
-                this.name = "0.0.0.0";
+                this.url = "0.0.0.0";
                 break;
             default:
                 throw new Exception("Network mode unsupported.");
@@ -24,10 +24,10 @@ public class BasicServer {
         try{
             HttpServer server = HttpServer.create(new InetSocketAddress(this.name, 8080), 0);
 
-            server.createContext("/", new StartFileHandler("start.html"));
-            server.createContext("/script", new ScriptFileHandler("/script/"));
-            server.createContext("/json_post", JsonFileHandler.getFileHandler("/json_post/", "POST"));
-            server.createContext("/json_get", JsonFileHandler.getFileHandler("/json_get/", "GET"));
+            server.createContext("/", new DefaultHandler());
+            server.createContext("/script", new GetHandler("/script/"));
+            server.createContext("/json_post", new GetHandler("/json_post/"));
+            server.createContext("/json_get", new PostHandler("/json_get/"));
 
 
             server.setExecutor(null);
