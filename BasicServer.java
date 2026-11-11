@@ -22,7 +22,7 @@ public class BasicServer {
 
     public void start(){
         try{
-            HttpServer server = HttpServer.create(new InetSocketAddress(this.name, 8080), 0);
+            HttpServer server = HttpServer.create(new InetSocketAddress(this.url, 8080), 0);
 
             server.createContext("/", new DefaultHandler());
             server.createContext("/script", new GetHandler("/script/"));
