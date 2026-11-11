@@ -2,11 +2,10 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.nio.file.*;
-import java.nio.charset.StandardCharsets;
 
 import com.sun.net.httpserver.*;
 
-public class PostHandler extends JsonFileHandler {
+public class PostHandler extends FileHandler {
     PostHandler(String requestHeader){
         super(requestHeader);
     }
@@ -17,7 +16,7 @@ public class PostHandler extends JsonFileHandler {
             //Get inputstream from the POST request.
             InputStream inputStream = exchange.getRequestBody();
             //Store the inputStream in a String.
-            String jsonString = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+            byte[] buffer = inputStream.readAllBytes();
 
             //Close the inputstream.
             inputStream.close();
@@ -25,11 +24,11 @@ public class PostHandler extends JsonFileHandler {
             //Define URI as a string.
             String uriString = exchange.getRequestURI().getPath();
 
-            //Define the file path to store the JSON at.
+            //Define the file path to store the file at.
             Path filePath = Paths.get(uriString.substring(requestHeaderLength));
 
             //Write the string into the file.
-            Files.writeString(filePath, jsonString);
+            Files.write(filePath, buffer);
         }
         catch(IOException e){
             System.out.println(e);

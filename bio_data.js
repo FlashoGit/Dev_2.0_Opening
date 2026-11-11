@@ -141,6 +141,7 @@ removePictureBtn.addEventListener('click', () => {
 function saveProfile(profile) {
   try {
     localStorage.setItem('profile', JSON.stringify(profile));
+    initializeProfile()
     return true;
   } catch {
     return false; 
