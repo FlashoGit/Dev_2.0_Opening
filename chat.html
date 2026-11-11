@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Encrypted Chat Storage</title>
+</head>
+<body>
+  <h2>Chat Message</h2>
+
+  <input type="text" id="messageInput"
+         placeholder="Enter your message">
+
+  <button onclick="saveMessage()">Save Message</button>
+  <button onclick="loadMessage()">Load Message</button>
+
+  <p id="output"></p>
+
+  <script>
+    // Create an encryption key for this session
+    let encryptionKey;
+
+    async function setupKey() {
+      encryptionKey = await crypto.subtle.generateKey(
+        { name: "AES-GCM", length: 256 },
+        true,
+        ["encrypt", "decrypt"]
+      );
+    }
+
+    function toBase64(bytes) {
+      return btoa(String.fromCharCode(...bytes));
+    }
+
+    function fromBase64(value) {
+      return Uint8Array.from(atob(value), c => c.charCodeAt(0));
+    }
+
+    async function saveMessage() {
+      const message = document.getElementById("messageInput").value;
+      if (!message.trim()) return;
+
+      const encoder = new TextEncoder();
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+
+      const encrypted = await crypto.subtle.encrypt(
+        { name: "AES-GCM", iv },
+        encryptionKey,
+        encoder.encode(message)
+      );
+
+      localStorage.setItem("chatMessage", JSON.stringify({
+        iv: toBase64(iv),
+        data: toBase64(new Uint8Array(encrypted))
+      }));
+
+      document.getElementById("output").textContent =
+        "Encrypted message saved!";
+    }
+
+    async function loadMessage() {
+      const saved = localStorage.getItem("chatMessage");
+      if (!saved) return;
+
+      try {
+        const { iv, data } = JSON.parse(saved);
+
+        const decrypted = await crypto.subtle.decrypt(
+          { name: "AES-GCM", iv: fromBase64(iv) },
+          encryptionKey,
+          fromBase64(data)
+        );
+
+        document.getElementById("output").textContent =
+          new TextDecoder().decode(decrypted);
+      } catch {
+        document.getElementById("output").textContent =
+          "Unable to decrypt this message.";
+      }
+    }
+
+    setupKey();
+  </script>
+</body>
+</html>

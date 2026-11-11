@@ -56,6 +56,24 @@ function backButton() {
   document.getElementById("buttoninfouser4").style.display = "block";
   document.getElementById("button4").style.display = "block";
   document.getElementById("profileheader").style.display = "block";
+  hideProfileDiv(); 
+}
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const chatButton = document.getElementById("chat");
+
+    if (chatButton) {
+        chatButton.addEventListener("click", function () {
+            window.location.href = "index_for_chat.html";
+        });
+    }
+});
+
   hideProfileDiv();
 }
 function hideNecessaryElements() {
