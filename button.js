@@ -94,3 +94,19 @@ function backButton() {
   document.getElementById("profileheader").style.display = "block";
   hideProfileDiv(); 
 }
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const chatButton = document.getElementById("chat");
+
+    if (chatButton) {
+        chatButton.addEventListener("click", function () {
+            window.location.href = "index_for_chat.html";
+        });
+    }
+});
+
