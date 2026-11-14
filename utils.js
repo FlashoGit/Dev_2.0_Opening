@@ -34,7 +34,7 @@ function wrap(wrapper_key, ...keys){
 async function post_profile(object, file_name){
     console.log("POST profile.");
     //Define a constant for the address for POST requests.
-    const REQUEST_ADDRESS = "/json_post/" + file_name;
+    const REQUEST_ADDRESS = "/json_post/profiles/" + file_name;
 
     try {
         //Send a POST request containing the object as a JSON.
@@ -57,7 +57,7 @@ async function post_profile(object, file_name){
 //Define a function to return a profile of a given file name (firstnamelastnameage.json).
 async function get_profile(file_name){
     //Define a constant for the address for POST requests.
-    const REQUEST_ADDRESS = "/json_get/" + file_name;
+    const REQUEST_ADDRESS = "/json_get/profiles/" + file_name;
 
     try {
         //Send a GET request for the JSON.
@@ -70,6 +70,29 @@ async function get_profile(file_name){
         console.log("Server response:", result);
 
         //Return the object contained in the JSON.
+        return result;
+    }
+    catch(e){
+        console.error(e);
+    }
+}
+
+//Define a function to return an array of profile objects and one null object 
+//as the last element. This function will return all profiles.
+async function get_profiles(){
+    //Define an address for the request.
+    const REQUEST_ADDRESS = "json_gets/profiles";
+
+    try{
+        //Perform the GET request.
+        const response = await fetch(REQUEST_ADDRESS);
+
+        //Parse the response to an array of objects.
+        const result = await response.json()
+
+        //Debug: Log the result.
+        console.log(result);
+
         return result;
     }
     catch(e){
