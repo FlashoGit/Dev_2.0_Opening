@@ -56,6 +56,7 @@ function backButton() {
   document.getElementById("buttoninfouser4").style.display = "block";
   document.getElementById("button4").style.display = "block";
   document.getElementById("profileheader").style.display = "block";
+  document.getElementById("createprofile").style.display = "block";
   hideProfileDiv();
 }
 function hideNecessaryElements() {
@@ -70,4 +71,5 @@ function hideNecessaryElements() {
   document.getElementById("buttoninfouser3").style.display = "none";
   document.getElementById("buttoninfouser4").style.display = "none";
   document.getElementById("profileheader").style.display = "none";
+  document.getElementById("createprofile").style.display = "none";
 }
