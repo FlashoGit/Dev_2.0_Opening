@@ -112,12 +112,12 @@ function displayProfiles(prof) {
 
 async function createButtons(){
     const profiles = await get_profiles();
-    for (const profile in profiles){
+    for (let i = 0; i < profiles.length - 1; i++) {
         const button = document.createElement("button");
-        button.textContent = "View " + profiles[profile].Chess_Data.Chesscom.Username + "'s Profile";
+        button.textContent = "View " + profiles[i].Chess_Data.Chesscom.Username + "'s Profile";
         button.addEventListener("click", () => {
             hideNecessaryElements();
-            displayProfiles(profiles[profile]);
+            displayProfiles(profiles[i]);
         });
         document.body.appendChild(button);
     }
