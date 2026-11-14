@@ -1,5 +1,6 @@
 function initializeButtons() {
   //Displays mini previews of the users profiles
+  createButtons()
   document.getElementById("buttoninfouser1").innerHTML = "Elo: " + profile1.Chess_Data.Chesscom.Time_Control.Rapid.Elo + "  Location: " + profile1.Location_Data.City;
   document.getElementById("buttoninfouser2").innerHTML = "Elo: " + profile2.Chess_Data.Chesscom.Time_Control.Rapid.Elo + "  Location: " + profile2.Location_Data.City;
   document.getElementById("buttoninfouser3").innerHTML = "Elo: " + profile3.Chess_Data.Chesscom.Time_Control.Rapid.Elo + "  Location: " + profile3.Location_Data.City;
