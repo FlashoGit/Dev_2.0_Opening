@@ -28,6 +28,7 @@ public class BasicServer {
             server.createContext("/script", new GetHandler("/script/"));
             server.createContext("/json_post", new GetHandler("/json_post/"));
             server.createContext("/json_get", new PostHandler("/json_get/"));
+            server.createContext("/json_gets", new GetMultipleHandler("/json_gets/"));
 
 
             server.setExecutor(null);
