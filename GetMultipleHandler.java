@@ -3,7 +3,6 @@ import java.io.OutputStream;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.stream.Stream;
 
 import java.nio.file.*;
 
@@ -17,11 +16,14 @@ public class GetMultipleHandler extends FileHandler{
     @Override 
     public void handle(HttpExchange exchange){
         try{
+            //Debug print
+            System.out.println("Handling GET multiple request.");
+
             //Store the URI in a string
             String uriString = exchange.getRequestURI().getPath();
 
             //Store the path of the directory which contains the disired files
-            Path dir = Paths.get(uriString);
+            Path dir = Paths.get(uriString.substring(requestHeaderLength));
 
             //Create an output stream to the response body.
             OutputStream os = exchange.getResponseBody();
@@ -44,7 +46,7 @@ public class GetMultipleHandler extends FileHandler{
 
                 //Add the buffer to the list of buffers.
                 buffers.add(buffer);
-                responseLength += buffer.length;
+                responseLength += buffer.length + 1;
             }
 
             //Populate the response header.
@@ -52,7 +54,7 @@ public class GetMultipleHandler extends FileHandler{
             exchange.getResponseHeaders().set("X-Content-Type-Options", "nosniff");
 
             //Send response header.
-            exchange.sendResponseHeaders(200, responseLength);
+            exchange.sendResponseHeaders(200, responseLength);  
 
             //Write the opening bracket '[' to the response body
             os.write(0x5B);
@@ -61,6 +63,8 @@ public class GetMultipleHandler extends FileHandler{
             for(byte[] buffer : buffers){
                 //Write the current buffer to the response body
                 os.write(buffer);
+                os.write(0x2C);
+                System.out.println(new String(buffer));
             }
 
             //End the response body with "null]" 

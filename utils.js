@@ -87,6 +87,8 @@ async function get_profiles(){
         //Perform the GET request.
         const response = await fetch(REQUEST_ADDRESS);
 
+        console.log(response);
+
         //Parse the response to an array of objects.
         const result = await response.json()
 
@@ -97,7 +99,8 @@ async function get_profiles(){
     }
     catch(e){
         console.error(e);
-    }
+    }        
+    
 }
 
 //create a function that takes a profile and displays it in the profilediv
@@ -112,6 +115,7 @@ function displayProfiles(prof) {
 
 async function createButtons(){
     const profiles = await get_profiles();
+    console.log(profiles);
     for (let i = 0; i < profiles.length - 1; i++) {
         const button = document.createElement("button");
         button.textContent = "View " + profiles[i].Chess_Data.Chesscom.Username + "'s Profile";
