@@ -30,7 +30,6 @@ public class BasicServer {
             server.createContext("/json_get", new PostHandler("/json_get/"));
             server.createContext("/json_gets", new GetMultipleHandler("/json_gets/"));
 
-
             server.setExecutor(null);
             server.start();
             System.out.println("Server started.");
