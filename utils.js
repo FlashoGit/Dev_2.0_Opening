@@ -81,7 +81,7 @@ async function get_profile(file_name){
 //as the last element. This function will return all profiles.
 async function get_profiles(){
     //Define an address for the request.
-    const REQUEST_ADDRESS = "json_gets/profiles";
+    const REQUEST_ADDRESS = "/json_gets/profiles";
 
     try{
         //Perform the GET request.
@@ -99,6 +99,7 @@ async function get_profiles(){
     }
     catch(e){
         console.error(e);
+        return null;
     }        
     
 }

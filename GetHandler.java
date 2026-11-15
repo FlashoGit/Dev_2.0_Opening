@@ -29,7 +29,6 @@ public class GetHandler extends FileHandler {
                     break;
                 case "/json_get":
                     exchange.getResponseHeaders().set("Content-Type", "text/json; charset=utf-8");
-                    
                     break;
                 default:
                     System.out.println("Unsupported file.");

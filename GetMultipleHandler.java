@@ -64,16 +64,18 @@ public class GetMultipleHandler extends FileHandler{
                 //Write the current buffer to the response body
                 os.write(buffer);
                 os.write(0x2C);
-                System.out.println(new String(buffer));
+                //System.out.println(new String(buffer));
             }
 
             //End the response body with "null]" 
             //Note: null is neccessary to keep the JSON syntactically valid due to
             //      , being after every profile.
             os.write(new byte[] {0x6E, 0x75, 0x6C, 0x6C, 0x5D});
+            os.close();
         }
         catch(IOException e){
             System.out.println(e);
         }
+        System.out.println("Here");
     }
 }
