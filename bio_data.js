@@ -139,13 +139,18 @@ removePictureBtn.addEventListener('click', () => {
  
 
 function saveProfile(profile) {
+  console.log("Saving Profile");
   try {
     localStorage.setItem('profile', JSON.stringify(profile));
-    initializeProfile()
+    put_profile(profile, profile.bio_data.Name);
+    console.log("Profile Saved");
     return true;
-  } catch {
+  } catch (e){
+    console.log(e);
+    console.log("Failed to save profile.");
     return false; 
   }
+  
 }
  
 function loadSavedProfile() {

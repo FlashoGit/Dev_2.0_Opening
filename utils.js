@@ -31,15 +31,15 @@ function wrap(wrapper_key, ...keys){
 }
 
 //Define a function to post an object as a JSON.
-async function post_profile(object, file_name){
-    console.log("POST profile.");
-    //Define a constant for the address for POST requests.
-    const REQUEST_ADDRESS = "/json_post/profiles/" + file_name;
+async function put_profile(object, file_name){
+    console.log("PUT profile.");
+    //Define a constant for the address for PUT requests.
+    const REQUEST_ADDRESS = "/json_put/profiles/" + file_name.replace(' ', '_').toLowerCase() + ".json";
 
     try {
-        //Send a POST request containing the object as a JSON.
+        //Send a PUT request containing the object as a JSON.
         const response = await fetch((REQUEST_ADDRESS), {
-            method: "POST",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },

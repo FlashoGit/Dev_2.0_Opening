@@ -74,7 +74,7 @@
         <p class="gc-muted">chat player 1 shares their ID. Player 2 pastes it and presses Connect. Both leave this page open while chatting. If one page is closed or reloded it will end chat and must start a new one.</p>
       </section>
       <section class="gc-panel gc-chat" aria-label="Chat room">
-        <div class="gc-chathead"><h2>Chat no bad words Nica 30 would not like it.</h2><small id="gc-with">No other player connected</small></div>
+        <div class="gc-chathead"><h2>Chat no bad words Nick Eh 30 would not like it.</h2><small id="gc-with">No other player connected</small></div>
         <div id="gc-messages" class="gc-messages" role="log" aria-live="polite" aria-relevant="additions"></div>
         <form id="gc-form" class="gc-compose">
           <input class="gc-input" id="gc-message" autocomplete="off" maxlength="500" placeholder="Connect to send a message..." disabled aria-label="Message" />
