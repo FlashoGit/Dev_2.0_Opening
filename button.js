@@ -1,6 +1,7 @@
 function initializeButtons() {
   //Displays mini previews of the users profiles
   document.getElementById("chatbutton").style.display = "none";
+  document.getElementById("backbutton").style.display = "none";
   createButtons()
 }
 function hideNecessaryElements() {
