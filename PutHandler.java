@@ -5,8 +5,8 @@ import java.nio.file.*;
 
 import com.sun.net.httpserver.*;
 
-public class PostHandler extends FileHandler {
-    PostHandler(String requestHeader){
+public class PutHandler extends FileHandler {
+    PutHandler(String requestHeader){
         super(requestHeader);
     }
 
