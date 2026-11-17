@@ -124,13 +124,20 @@ async function createButtons(){
     console.log("hi");
     console.log(profiles);
     for (let i = 0; i < profiles.length - 1; i++) {
+        const text = document.createElement("div");
+        text.textContent = "Name: " +profiles[i].bio_data.Name + "    Age: " + profiles[i].bio_data.Age + "    Location: " + profiles[i].Location_Data.City  ;
+        text.className = "profile-text";
         const button = document.createElement("button");
         button.textContent = "View " + profiles[i].Chess_Data.Chesscom.Username + "'s Profile";
+        button.className = "profile-button";
         button.addEventListener("click", () => {
-            hideNecessaryElements();
             displayProfiles(profiles[i]);
+            hideNecessaryElements();
+            document.getElementById("profilediv").style.display = "block";
         });
+       
         document.body.appendChild(button);
+        document.body.appendChild(text);
     }
 }
 
