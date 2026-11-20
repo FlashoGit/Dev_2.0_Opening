@@ -11,7 +11,7 @@
             "Username": "Randomguy34",
             "Time_Control": {
                 "Rapid": {
-                    "Elo":"Rapid 200", 
+                    "Elo": 200, 
                     "Games_Played": 100
                 },
                 "Blitz": {
