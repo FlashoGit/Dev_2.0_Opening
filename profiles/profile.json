@@ -62,5 +62,10 @@
     },
     "Location_Data": {
         "City": "Ottawa"
+    },
+    "Account_Data": {
+        "Username": "Goober",
+        "Password": "Uncrackable",
+        "Chat_ID": ""
     }
 }

@@ -173,7 +173,7 @@ function loadSavedProfile() {
  
 
 function buildProfileJson(bio, location) {
-  return { bio_data: bio, Chess_Data: {}, Location_Data: location };
+  return { bio_data: bio, Chess_Data: {}, Location_Data: location, Account_Data: {} };
 }
  
 
@@ -213,13 +213,13 @@ form.addEventListener('submit', async (e) => {
   currentProfile = buildProfileJson(bio, location);
   const savedLocally = saveProfile(currentProfile);
 
-  try {
-    const id = await sendToServer(currentProfile);
-    statusEl.textContent = `Profile saved successfully! Your profile ID is ${id}.`;}
-    catch (err) {
-      const why = err instanceof TypeError ? 'Network error' : err.message;
-      statusEl.textContent = (savedLocally ? 'Saved in the browser only': 'Not Saved') + '(${why}). You can still download the profile below.';
-    }
+  // try {
+  //   const id = await sendToServer(currentProfile);
+  //   statusEl.textContent = `Profile saved successfully! Your profile ID is ${id}.`;}
+  //   catch (err) {
+  //     const why = err instanceof TypeError ? 'Network error' : err.message;
+  //     statusEl.textContent = (savedLocally ? 'Saved in the browser only': 'Not Saved') + '(${why}). You can still download the profile below.';
+  //   }
 
   const preview = structuredClone(currentProfile);
   if (preview.bio_data.Picture) preview.bio_data.Picture = '(picture data...)';

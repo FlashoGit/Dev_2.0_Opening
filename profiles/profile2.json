@@ -62,5 +62,10 @@
     },
     "Location_Data": {
         "City": "Toronto"
+    },
+    "Account_Data": {
+        "Username": "Chunkyhippo73",
+        "Password": "Chungus37",
+        "Chat_ID": ""
     }
 }

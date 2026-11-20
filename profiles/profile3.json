@@ -62,5 +62,10 @@
     },
     "Location_Data": {
         "City": "Quebec city"
+    },
+    "Account_Data": {
+        "Username": "Randomguy34",
+        "Password": "Specificdude42",
+        "Chat_ID": ""
     }
 }
