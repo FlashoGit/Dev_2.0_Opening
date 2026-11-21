@@ -76,5 +76,5 @@ public class GetMultipleHandler extends FileHandler{
         catch(IOException e){
             System.out.println(e);
         }
-    }
+    }//mixer
 }
