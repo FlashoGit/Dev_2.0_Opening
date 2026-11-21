@@ -29,5 +29,31 @@ function backButton() {
   document.getElementById("createprofile").style.display = "block";
   document.getElementById("profileheader").style.display = "block";
   document.getElementById("chatbutton").style.display = "none";
-
+}
+function loginButtonUsername(){
+  const loginForm = document.createElement("input");
+  loginForm.setAttribute("type", "text");
+  loginForm.setAttribute("id", "loginform");
+  loginForm.setAttribute("placeholder", "Enter your username"); 
+  document.body.appendChild(loginForm);
+}
+function loginButtonPassword(){
+  const password = document.createElement("input");
+  password.setAttribute("type", "text");
+  password.setAttribute("id", "password");
+  password.setAttribute("placeholder", "Enter your password");
+  document.body.appendChild(password);
+}
+function loginButton(){
+  const loginButton = document.createElement("button");
+  loginButton.setAttribute("id", "loginbutton");
+  loginButton.textContent = "Login";
+  document.body.appendChild(loginButton);
+  loginButton.addEventListener("click", () => {
+    if (loginform.value === "goon") {
+      if (password.value === "goon") {
+        console.log("Login successful");
+      }
+    }
+  });
 }
