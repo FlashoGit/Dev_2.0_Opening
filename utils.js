@@ -128,11 +128,12 @@ async function createButtons(){
         text.textContent = "Name: " +profiles[i].bio_data.Name + "    Age: " + profiles[i].bio_data.Age + "    Location: " + profiles[i].Location_Data.City  ;
         text.className = "profile-text";
         const button = document.createElement("button");
-        if(profiles[i].Chess_Data.Chesscom != null){
+        if(profiles[i].Chess_Data.Chesscom != null && profiles[i].Chess_Data.Chesscom.Username != ""){
             button.textContent = "View " + profiles[i].Chess_Data.Chesscom.Username + "'s Profile";
         }
         else{
             button.textContent = "View " + profiles[i].bio_data.Name + "'s Profile";
+            console.log(profiles[i].bio_data.Name);
         }
         button.className = "profile-button";
         button.addEventListener("click", () => {
