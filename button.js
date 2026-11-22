@@ -55,6 +55,7 @@ async function loginButton(){
     if (loginform.value === profiles[i].Account_Data.Username) {
       if (password.value === profiles[i].Account_Data.Password) {
         console.log("Login successful");
+        window.location.href = "index.html";
       }
     }
   }
