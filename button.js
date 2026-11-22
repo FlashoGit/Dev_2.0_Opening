@@ -44,16 +44,19 @@ function loginButtonPassword(){
   password.setAttribute("placeholder", "Enter your password");
   document.body.appendChild(password);
 }
-function loginButton(){
+async function loginButton(){
   const loginButton = document.createElement("button");
   loginButton.setAttribute("id", "loginbutton");
   loginButton.textContent = "Login";
   document.body.appendChild(loginButton);
+  const profiles = await get_profiles();
   loginButton.addEventListener("click", () => {
-    if (loginform.value === "goon") {
-      if (password.value === "goon") {
+    for (let i = 0; i < profiles.length - 1; i++) {
+    if (loginform.value === profiles[i].Account_Data.Username) {
+      if (password.value === profiles[i].Account_Data.Password) {
         console.log("Login successful");
       }
     }
+  }
   });
 }
