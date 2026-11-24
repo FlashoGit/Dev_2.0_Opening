@@ -142,8 +142,11 @@ function saveProfile(profile) {
   console.log("Saving Profile");
   try {
     localStorage.setItem('profile', JSON.stringify(profile));
+    profile.Account_Data.Username = localStorage.getItem('username');
+    profile.Account_Data.Password = localStorage.getItem('password');
     put_profile(profile, profile.bio_data.Name);
     console.log("Profile Saved");
+    window.location.href = "index.html";
     return true;
   } catch (e){
     console.log(e);
