@@ -158,6 +158,12 @@ function loadSavedProfile() {
     const profile = JSON.parse(localStorage.getItem('profile'));
     const bio = profile.bio_data;
     const location = profile.location;
+    const chess_profile = profile.Chess_Data && profile.Chess_Data.Chess.com;
+    if (chess_profile) {
+      chessData = {Chesscom: chessCom};
+      chessInput.value = Chess.Username ?? '';
+      showChessSummary();
+    }
     if (bio) {
       form.elements.Name.value = bio.Name ?? '';
       form.elements.Age.value = bio.Age ?? '';
@@ -173,14 +179,165 @@ function loadSavedProfile() {
  
 
 function buildProfileJson(bio, location) {
-  return { bio_data: bio, Chess_Data: {}, Location_Data: location, Account_Data: {} };
+  return { bio_data: bio, Chess_Data: chessData, Location_Data: location, Account_Data: {} };
 }
  
 
 bioInput.addEventListener('input', () => {
   bioCount.textContent = bioInput.value.length;
 });
- 
+
+//chess.com part 
+const CHESSAPI = 'https://api.chess.com/pub/player/';
+const ChessUsernameInput =  /^[A-Za-z0-9_-]{3,25}$/;
+const FETCH_CHESS_LABEL = fetchchessBtn.textContent;
+
+const CHESS_MODES = {
+  bullet: 'Bullet',
+  blitz: 'Blitz',
+  rapid: 'Rapid',
+  daily: 'Daily',
+};
+
+async function fetchChessProfile(username) {
+  const res = await fetch(CHESSAPI + encodeURIComponent(username.toLowerCase()) + '/stats');
+  if (res.status === 404) throw new Error('Chess.com profile not found.');
+  if (!res.ok) throw new Error('Failed to fetch Chess.com profile.');
+  if (res.status === 429) throw new Error('Too many requests to Chess.com. Please try again later.');
+
+  const stats = await res.json();
+
+  const timeControls = {};
+  let favoriteMode = null;
+  for (const [mode, data] of Object.entries(CHESS_MODES)) {
+    const mode = stats[apiName];
+    const elo = mode?.last?.rating;
+
+    if (!Number.isInteger(elo)) continue;
+
+    const record = mode.record || {};
+    const wins = record.win || 0;
+    const losses = record.loss || 0;
+    const draws = record.draw || 0;
+    timeControl[label] = { Elo: elo, Wins: wins, Losses: losses, Draws: draws, Games_Played: wins + losses + draws };
+    
+    if (favourite === null || timeControl[label].Games_Played > 
+      timeControl[favourite].Games_Played) favourite = label;
+  }
+
+  if (favourite === null) throw new Error('That player has no rated games on Chess.com.');
+
+  return { Chesscom: { Username: username, Time_Control: timeControl, fav_time_control: favourite } };
+  }
+
+function showChessSummary() {
+  chessSummary.textContent = '';
+  const info = chessData.Chesscom;
+  if (!info) {
+    chessSummary.hidden = true;
+    return;
+  }
+
+const lines = [`Chess.com: ${info.Username}`];
+  for (const [name, s] of Object.entries(info.Time_Control)) {
+    lines.push(`${name}: ${s.Elo} Elo, ${s.Wins} wins, ${s.Losses} losses` + (s.Draws ? `, ${s.Draws} draws` : ''));
+  }
+  lines.push(`Favourite game mode: ${info.fav_time_control}`);
+  lines.forEach((text, i) => {
+    const line = document.createElement('div');
+    line.textContent = text; 
+    if (i === 0) line.style.fontWeight = '600';
+    chessSummary.appendChild(line);
+  });
+  chessSummary.hidden = false;
+}
+
+function chessError(message) {
+  form.querySelector('[data-error-for="chessUsername"]').textContent = message;
+  chessInput.style.borderColor = message ? COLORS.error : COLORS.border;
+}
+
+async function loadChessData() {
+  const username = chessInput.value.trim();
+  chessData = {};          // never keep the old player's data while loading a new one
+  showChessSummary();
+  setChessError('');
+
+  if (!CHESS_USERNAME_RE.test(username)) {
+    setChessError('Enter a Chess.com username (3-25 letters, numbers, _ or -).');
+    return false;
+  }
+}
+
+  fetchChessBtn.disabled = true;
+  fetchChessBtn.textContent = 'Fetching...';
+
+  try{
+    const fetchedData = await fetchChessProfile(username);
+
+    if (chessInput.value.trim().toLowerCase() !== username.toLowerCase()) {
+      return false;
+    }
+
+    chessData = fetched;
+    showChessSummary();
+    return true;
+
+  } catch (err) {
+    if (chessInput.value.trim().toLowerCase() !== username.toLowerCase()) {
+      setChessError(err.message);
+      return false;
+    }
+  } finally {
+    fetchChessBtn.disabled = false;
+    fetchChessBtn.textContent = FETCH_CHESS_LABEL;
+
+    if (chessInput.value.trim().toLowerCase() !== username.toLowerCase()) scheduleLoadChessData();
+  }
+
+  let chessLoadTimeout = null;
+  function scheduleFetchChessData() {
+    clearTimeout(chessLoadTimeout);
+    const name = chessInput.value.trim();
+    if (!CHESS_USERNAME_RE.test(name)) {
+      setChessError('Enter a Chess.com username (3-25 letters, numbers, _ or -).');
+      return;
+    }
+    if (chessData.Chesscom && chessData.Chesscom.Username.toLowerCase() === name.toLowerCase()) {
+      setChessError('');
+      return;
+    }
+    chessTimer = setTimeout(() => { if (!fetchChessBtn.disabled) loadChessData(); }, 800);
+    
+  }
+
+  fetchChessBtn.addEventListener('click', loadChessData);
+
+  chessInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    loadChessData();
+  }
+});
+
+
+chessInput.addEventListener('input', () => {
+  const info = chessData.Chesscom;
+  if (info && info.Username.toLowerCase() !== chessInput.value.trim().toLowerCase()) {
+    chessData = {};
+    showChessSummary();
+  }
+  setChessError('');
+  scheduleChessFetch();
+});
+
+chessInput.addEventListener('blur', () => {
+  clearTimeout(chessTimer);
+  const name = chessInput.value.trim();
+  if (CHESS_USERNAME_RE.test(name) && !chessData.Chesscom && !fetchChessBtn.disabled) loadChessData();
+});
+
+
 async function sendToServer(profile) {
   let id = null;
   try { id = localStorage.getItem('profile_id'); } catch { /* ignore */ }

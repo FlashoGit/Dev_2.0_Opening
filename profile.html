@@ -51,6 +51,17 @@
       </div>
 
       <div class="field">
+        <label for="chessUsername">Chess.com username <span class="optional">(optional)</span></label>
+        <div class="chess-row">
+          <input id="chessUsername" name="chessUsername" type="text" autocomplete="off" placeholder="" maxlength="25">
+          <button type="button" id="fetch-chess-btn" class="secondary">Fetch Chess.com info</button>
+        </div>
+        <small class="hint">We read your public ratings, wins and losses from Chess.com. No password or key needed.</small>
+        <div id="chess-summary" hidden></div>
+        <small class="error" data-error-for="chessUsername"></small>
+      </div>
+
+      <div class="field">
         <label for="Bio_Description">Bio <span class="optional">(optional)</span></label>
         <textarea id="Bio_Description" name="Bio_Description" rows="4" maxlength="300"
                   placeholder=""></textarea>
