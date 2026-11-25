@@ -2,7 +2,6 @@ function initializeButtons() {
   //Displays mini previews of the users profiles
   document.getElementById("chatbutton").style.display = "none";
   document.getElementById("backbutton").style.display = "none";
-  document.getElementById("createprofile").style.display = "none";
   createButtons()
 }
 function hideNecessaryElements() {
@@ -14,7 +13,6 @@ function hideNecessaryElements() {
     text.style.display = "none";
   }
   document.getElementById("backbutton").style.display = "block";
-  document.getElementById("createprofile").style.display = "none";
   document.getElementById("profileheader").style.display = "none";
   document.getElementById("chatbutton").style.display = "block";
 }

@@ -81,9 +81,7 @@ async function get_profile(file_name){
 //as the last element. This function will return all profiles.
 async function get_profiles(){
     //Define an address for the request.
-    
     const REQUEST_ADDRESS = "/json_gets/profiles";
-    
 
     try{
         //Perform the GET request.
@@ -106,6 +104,32 @@ async function get_profiles(){
         return null;
     }        
     
+}
+
+//create a function that gets profiles that match a filter as a string
+async function get_filtered_profiles(filter){
+    //Define an address for the request.
+    const REQUEST_ADDRESS = "/filtered_get/" + filter;
+
+    try{
+        //Perform the GET request.
+        const response = await fetch(REQUEST_ADDRESS);
+        console.log("Response received:", response);
+
+        console.log(response);
+
+        //Parse the response to an array of objects.
+        const result = await response.json()
+
+        //Debug: Log the result.
+        console.log(result);
+
+        return result;
+    }
+    catch(e){
+        console.error(e);
+        return null;
+    }        
 }
 
 //create a function that takes a profile and displays it in the profilediv
