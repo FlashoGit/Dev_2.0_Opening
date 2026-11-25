@@ -6,4 +6,4 @@ abstract public class FileHandler implements HttpHandler {
     FileHandler(String requestHeader){
         this.requestHeaderLength = requestHeader.length();
     }
-}
+}//beaker
