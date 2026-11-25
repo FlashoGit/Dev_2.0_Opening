@@ -6,7 +6,7 @@ import java.nio.file.*;
 import com.sun.net.httpserver.*;
 
 public class DefaultHandler  extends FileHandler {
-    final String START_FILE_NAME = "index.html";
+    final String START_FILE_NAME = "signup.html";
 
     DefaultHandler(){
         super("/");
@@ -49,5 +49,5 @@ public class DefaultHandler  extends FileHandler {
         catch(IOException e){
             System.out.println(e);
         }
-    }
+    }//spoon
 }
